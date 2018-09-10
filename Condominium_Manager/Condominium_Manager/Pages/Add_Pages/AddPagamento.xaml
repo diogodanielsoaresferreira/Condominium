@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="Condominium_Manager.Pages.Add_Pages.AddPagamento"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Condominium_Manager.Pages.Add_Pages"
+      xmlns:System="clr-namespace:System;assembly=mscorlib"
+      DataContext="{Binding CurrentPage}"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300">
+
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Margin="10">
+            <Label FontSize="20">Associar Pagamento</Label>
+            <Border x:Name="ErrorBorder" Background="Red" CornerRadius="5" Margin="0,5" Padding="5" Visibility="Collapsed">
+                <Label x:Name="ErrorLabel" Foreground="White"></Label>
+            </Border>
+
+            <Label>Data</Label>
+             <DatePicker HorizontalAlignment="Left" Name="datePicker"
+                SelectedDate="{Binding
+                Path=Date,
+                Mode=TwoWay,
+                TargetNullValue={x:Static System:DateTime.Now}}"
+                VerticalAlignment="Top" />
+            <Label>Descrição</Label>
+            <TextBox ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="tbDesc" TextWrapping="Wrap" AcceptsReturn="True" Height="50px" MaxLength="100"></TextBox>
+            <Label>Preço (€) (*)</Label>
+            <TextBox x:Name="tbBalanco" MaxLength="25"></TextBox>
+            <Label>Sujeito Fiscal (*)</Label>
+            <ComboBox x:Name="ChooseSujFis" SelectedIndex="0" DisplayMemberPath="nome" Style="{StaticResource ComboBoxMenu}" ItemsSource="{Binding SujeitosFiscais}" IsEnabled="True"></ComboBox>
+            <Button Grid.Column="0" Margin="0,10,5,0" Style="{StaticResource SidebarButton}" Content="Adicionar Sujeito Fiscal" Click="AddSujFisc"></Button>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Margin="0,10,5,0" Style="{StaticResource SidebarButton}" Content="Associar Pagamento" Click="AddPayment"></Button>
+                <Button Grid.Column="1" Margin="5,10,0,0" Style="{StaticResource SidebarButton}" Content="Cancelar" Click="Cancel"></Button>
+            </Grid>
+
+        </StackPanel>
+    </Grid>
+</UserControl>

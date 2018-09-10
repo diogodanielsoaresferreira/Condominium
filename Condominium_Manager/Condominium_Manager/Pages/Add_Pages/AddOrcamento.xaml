@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="Condominium_Manager.Pages.AddOrcamento"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Condominium_Manager.Pages"
+      xmlns:System="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" 
+      DataContext="{Binding CurrentPage}"
+      d:DesignHeight="300" d:DesignWidth="300">
+
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Margin="10">
+            <Label FontSize="20">Adicionar Orçamento</Label>
+            <Border x:Name="ErrorBorder" Background="Red" CornerRadius="5" Margin="0,5" Padding="5" Visibility="Collapsed">
+                <Label x:Name="ErrorLabel" Foreground="White"></Label>
+            </Border>
+
+            <Label>Título (*)</Label>
+            <TextBox x:Name="tbTitulo" MaxLength="25"></TextBox>
+            <Label>Descrição</Label>
+            <TextBox ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="tbDesc" TextWrapping="Wrap" AcceptsReturn="True" Height="50px" MaxLength="100"></TextBox>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <Label>Data Inicial</Label>
+                    <DatePicker HorizontalAlignment="Left" Name="tbInitial_Date"
+                                SelectedDate="{Binding
+                                Path=Date,
+                                Mode=TwoWay,
+                                TargetNullValue={x:Static System:DateTime.Now}}"
+                                VerticalAlignment="Top" />
+                    <!--<Label Content="{Binding Initial_Date}" x:Name="tbInitial_Date"></Label>-->
+
+                </StackPanel>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Right">
+                    <Label>Data Final</Label>
+                    <DatePicker HorizontalAlignment="Left" Name="tbFinal_Date"
+                                SelectedDate="{Binding
+                                Path=Date,
+                                Mode=TwoWay,
+                                TargetNullValue={x:Static System:DateTime.Now}}"
+                                VerticalAlignment="Top" />
+                    <!--<Label Content="{Binding Final_Date}" x:Name="tbFinal_Date"></Label>-->
+
+                </StackPanel>
+               
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Margin="0,10,5,0" Style="{StaticResource SidebarButton}" Content="Adicionar Orçamento" Click="add"></Button>
+                <Button Grid.Column="1" Margin="5,10,0,0" Style="{StaticResource SidebarButton}" Content="Cancelar" Click="Cancel"></Button>
+            </Grid>
+
+        </StackPanel>
+    </Grid>
+</UserControl>

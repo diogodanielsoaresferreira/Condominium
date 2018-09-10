@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="Condominium_Manager.Pages.EditBuilding"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Condominium_Manager.Pages"
+      mc:Ignorable="d"
+      DataContext="{Binding CurrentPage}"
+      d:DesignHeight="300" d:DesignWidth="300">
+
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Margin="10">
+            <Label FontSize="20">Editar Prédio</Label>
+            <Border x:Name="ErrorBorder" Background="Red" CornerRadius="5" Margin="0,5" Padding="5" Visibility="Collapsed">
+                <Label x:Name="ErrorLabel" Foreground="White"></Label>
+            </Border>
+
+            <Label>Nome (*)</Label>
+            <TextBox x:Name="tbNome" MaxLength="50"></TextBox>
+            <Label>Morada</Label>
+            <TextBox x:Name="tbMorada" MaxLength="100"></TextBox>
+            <Label>Cidade</Label>
+            <TextBox x:Name="tbCidade" MaxLength="25"></TextBox>
+            <Label>Código Postal</Label>
+            <Grid Height="{Binding ActualHeight, ElementName=tbCidade}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40px"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="30px"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="tbCodigo_Postal" MaxLength="4" Grid.Column="0"></TextBox>
+                <TextBlock Grid.Column="1" Margin="2,0,2,0"> -</TextBlock>
+                <TextBox x:Name="tbCodigo_Postal2" MaxLength="3" Grid.Column="2"></TextBox>
+            </Grid>
+            <Label>Latitude (*)</Label>
+            <TextBox x:Name="tbLatitude"></TextBox>
+            <Label>Longitude (*)</Label>
+            <TextBox x:Name="tbLongitude"></TextBox>
+            <Label>Área</Label>
+            <TextBox x:Name="tbArea"></TextBox>
+
+            <Button Name="btnSaveFile" Margin="0,10,0,0" Style="{StaticResource SidebarButton}" Click="btnSaveFile_Click">Adicionar fotos do prédio</Button>
+
+            <DataGrid MaxHeight="150px" x:Name="myDataGrid" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding photos}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" IsReadOnly="True" Binding="{Binding FileName}" Header="Name"/>
+                    <DataGridTextColumn Width="*" IsReadOnly="True" Binding="{Binding sizeKB}" Header="Size"/>
+                    <DataGridTemplateColumn Header="Delete">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Delete" Click="DeleteBuilding">
+                                    
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+                </DataGrid.Columns>
+                
+            </DataGrid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Margin="0,10,10,0" Grid.Column="0"  Style="{StaticResource SidebarButton}" Content="Efetuar Alterações" Click="UpdateBuilding"></Button>
+                <Button Margin="10,10,0,0" Grid.Column="1" Style="{StaticResource SidebarButton}" Content="Retroceder" Click="Retroceder"></Button>
+            </Grid>
+            <StackPanel Orientation="Horizontal">
+                
+            </StackPanel>
+            
+        </StackPanel>
+    </Grid>
+</UserControl>

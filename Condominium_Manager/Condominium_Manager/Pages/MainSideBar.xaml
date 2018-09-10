@@ -1,0 +1,159 @@
+﻿<UserControl x:Class="Condominium_Manager.Pages.MainSideBar"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Condominium_Manager.Pages"
+      mc:Ignorable="d"
+      DataContext="{Binding RelativeSource={RelativeSource Self}}"
+      d:DesignHeight="500" d:DesignWidth="300">
+
+    <Grid Margin="0,5,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="SP">
+            <Button x:Name="VGButton" Style="{StaticResource SidebarButton}" Click="MainBPage">
+                <Button.Content>
+                    <Grid Width="{Binding ActualWidth, ElementName=VGButton}" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Margin="0,0,5,0" Grid.Column="0" VerticalAlignment="Center" Stretch="Uniform" HorizontalAlignment="Center" Width="30" Height="20" Source="/Images/global_eye.png" />
+                        <TextBlock Grid.Column="1"><TextBlock TextDecorations="Underline" Text="V" />isão Geral</TextBlock>
+                    </Grid>
+                </Button.Content>
+            </Button>
+            <Button x:Name="EDButton" Style="{StaticResource SidebarButton}" Click="Fractions_Page">
+                <Button.Content>
+                    <Grid Width="{Binding ActualWidth, ElementName=EDButton}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Margin="0,0,5,0" Grid.Column="0" VerticalAlignment="Center" Stretch="Uniform" HorizontalAlignment="Center" Width="30" Height="20" Source="/Images/dominium_symbol.png"/>
+                        <TextBlock Grid.Column="1"><TextBlock TextDecorations="Underline" Text="F" />rações</TextBlock>
+                    </Grid>
+                </Button.Content>
+            </Button>
+            <Button x:Name="FIButton" Style="{StaticResource SidebarButton}" Click="FinancesPage">
+                <Button.Content>
+                    <Grid Width="{Binding ActualWidth, ElementName=FIButton}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Margin="0,0,5,0" Grid.Column="0" VerticalAlignment="Center" Stretch="Uniform" HorizontalAlignment="Center" Width="30" Height="20" Source="/Images/dollar.png" />
+                        <TextBlock Grid.Column="1"><TextBlock TextDecorations="Underline" Text="B" />alanço</TextBlock>
+                    </Grid>
+                </Button.Content>
+            </Button>
+            <Button x:Name="COButton" Style="{StaticResource SidebarButton}" Click="Condominos_Page">
+                <Button.Content>
+                    <Grid Width="{Binding ActualWidth, ElementName=COButton}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Margin="0,0,5,0" Grid.Column="0" VerticalAlignment="Center" Stretch="Uniform" HorizontalAlignment="Center" Width="30" Height="20" Source="/Images/condo.png" />
+                        <TextBlock Grid.Column="1"><TextBlock TextDecorations="Underline" Text="C" />ondóminos</TextBlock>
+                    </Grid>
+                </Button.Content>
+            </Button>
+            <Button x:Name="QuotasButton" Style="{StaticResource SidebarButton}" Click="Quotas_Page">
+                <Button.Content>
+                    <Grid Width="{Binding ActualWidth, ElementName=QuotasButton}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Margin="0,0,5,0" Grid.Column="0" VerticalAlignment="Center" Stretch="Uniform" HorizontalAlignment="Center" Width="30" Height="20" Source="/Images/payment.png" />
+                        <TextBlock Grid.Column="1"><TextBlock TextDecorations="Underline" Text="Q" />uotas</TextBlock>
+                    </Grid>
+                </Button.Content>
+            </Button>
+            <Button x:Name="AGButton" Style="{StaticResource SidebarButton}" Click="AgendaPage">
+                <Button.Content>
+                    <Grid Width="{Binding ActualWidth, ElementName=AGButton}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Margin="0,0,5,0" Grid.Column="0" VerticalAlignment="Center" Stretch="Uniform" HorizontalAlignment="Center" Width="30" Height="20" Source="/Images/calendar.png" />
+                        <TextBlock Grid.Column="1"><TextBlock TextDecorations="Underline" Text="A" />genda</TextBlock>
+                    </Grid>
+                </Button.Content>
+            </Button>
+            <Button x:Name="REButton" Style="{StaticResource SidebarButton}" Click="Reunion_Page">
+                <Button.Content>
+                    <Grid Width="{Binding ActualWidth, ElementName=REButton}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Margin="0,0,5,0" Grid.Column="0" VerticalAlignment="Center" Stretch="Uniform" HorizontalAlignment="Center" Width="30" Height="20" Source="/Images/people.png" />
+                        <TextBlock Grid.Column="1"><TextBlock TextDecorations="Underline" Text="R" />euniões</TextBlock>
+                    </Grid>
+                </Button.Content>
+            </Button>
+            <Button x:Name="ORCButton" Style="{StaticResource SidebarButton}" Click="Orcamento_Page">
+                <Button.Content>
+                    <Grid Width="{Binding ActualWidth, ElementName=ORCButton}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Margin="0,0,5,0" Grid.Column="0" VerticalAlignment="Center" Stretch="Uniform" HorizontalAlignment="Center" Width="30" Height="20" Source="/Images/budget.png" />
+                        <TextBlock Grid.Column="1"><TextBlock TextDecorations="Underline" Text="O" />rçamentos</TextBlock>
+                    </Grid>
+                </Button.Content>
+            </Button>
+            <Button x:Name="MAButton" Style="{StaticResource SidebarButton}" Click="Manutencao_Page">
+                <Button.Content>
+                    <Grid Width="{Binding ActualWidth, ElementName=MAButton}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Margin="0,0,5,0" Grid.Column="0" VerticalAlignment="Center" Stretch="Uniform" HorizontalAlignment="Center" Width="30" Height="20" Source="/Images/settings.png" />
+                        <TextBlock Grid.Column="1"><TextBlock TextDecorations="Underline" Text="M" />anutenções</TextBlock>
+                    </Grid>
+                </Button.Content>
+            </Button>
+
+
+        </StackPanel>
+
+        <Border Grid.Row="1" CornerRadius="10">
+            <Button  Height="Auto" x:Name="SPButton" Style="{StaticResource LastSidebarButton}" Click="Out_Building">
+                <Button.Content>
+                    <Grid Width="{Binding ActualWidth, ElementName=SPButton}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" VerticalAlignment="Center" Stretch="Uniform" HorizontalAlignment="Center" Width="30" Height="20" Source="/Images/exit.png" Margin="0,0,3,0"/>
+                        <TextBlock Grid.Column="1">Sair do Prédio</TextBlock>
+                    </Grid>
+                </Button.Content>
+                
+            </Button>
+        </Border>
+
+    </Grid>
+    
+    
+</UserControl>

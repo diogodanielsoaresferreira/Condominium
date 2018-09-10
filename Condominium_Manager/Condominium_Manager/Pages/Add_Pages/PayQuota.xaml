@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="Condominium_Manager.Pages.Add_Pages.PayQuota"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Condominium_Manager.Pages.Add_Pages"
+      xmlns:cm="clr-namespace:Condominium_Manager"
+      xmlns:my="http://schemas.microsoft.com/wpf/2008/toolkit"
+      mc:Ignorable="d" 
+      DataContext="{Binding CurrentPage}"
+      d:DesignHeight="300" d:DesignWidth="300">
+
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50px" />
+        </Grid.RowDefinitions>
+
+        <Label FontSize="20" HorizontalAlignment="Center" Content="Pagar Quota" Grid.Row="0"></Label>
+        
+        <StackPanel VerticalAlignment="Center" Grid.Row="1" HorizontalAlignment="Center">
+            <Label FontSize="16" Content="Condómino atual" HorizontalAlignment="Center"></Label>
+            <Border  BorderBrush="Black" BorderThickness="0.5" Opacity="0.5"></Border>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel>
+                    <Label Content="Nome"></Label>
+                    <Label Content="{Binding Path=f.CurrentCondomino.Nome}"></Label>
+                </StackPanel>
+                <StackPanel>
+                    <Label Content="Email"></Label>
+                    <Label Content="{Binding Path=f.CurrentCondomino.Email}"></Label>
+                </StackPanel>
+                <StackPanel>
+                    <Label Content="NIF"></Label>
+                    <Label Content="{Binding Path=f.CurrentCondomino.NIF}"></Label>
+                </StackPanel>
+
+            </StackPanel>
+        </StackPanel>
+
+        <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1"></Border>
+
+        <StackPanel Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label FontSize="16" Content="Fração" HorizontalAlignment="Center"></Label>
+            <Border BorderBrush="Black" BorderThickness="0.5" Opacity="0.5"></Border>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel>
+                    <Label Content="Piso"></Label>
+                    <Label Content="{Binding Path=f.Piso}"></Label>
+                </StackPanel>
+                <StackPanel>
+                    <Label Content="Zona"></Label>
+                    <Label Content="{Binding Path=f.Zona}"></Label>
+                </StackPanel>
+                <StackPanel>
+                    <Label Content="Tipo"></Label>
+                    <Label Content="{Binding Path=f.Tipo}"></Label>
+                </StackPanel>
+                <StackPanel>
+                    <Label Content="Área"></Label>
+                    <Label Content="{Binding Path=f.Area}"></Label>
+                </StackPanel>
+                <StackPanel>
+                    <Label Content="Valor da Quota"></Label>
+                    <Label Content="{Binding Path=f.Quota}"></Label>
+                </StackPanel>
+
+            </StackPanel>
+        </StackPanel>
+
+        <Border Grid.Row="4" BorderBrush="Black" BorderThickness="1"></Border>
+
+        <StackPanel Grid.Row="5" HorizontalAlignment="Center" >
+            <Label FontSize="20" Content="Mês" HorizontalAlignment="Center"></Label>
+            <!-- Wont't work to get the month -->
+            <StackPanel Orientation="Horizontal">
+                <Label FontSize="20" Content="{Binding Data_Pagar}"></Label>
+
+            </StackPanel>
+            <!--<my:Calendar DisplayDateStart="{Binding DateStart}" DisplayDateEnd="{Binding DateEnd}" DisplayDateChanged="calendar1_DisplayDateChanged" HorizontalAlignment="Center" Loaded="calendar1_Loaded" DisplayModeChanged="calendar1_DisplayModeChanged" Name="calendar1" DisplayMode="Month" />-->
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="6" HorizontalAlignment="Center">
+            <Button Margin="0,10,5,0" Style="{StaticResource SidebarButton}" Content="Pagar Quota" Click="PayQuotaButton"></Button>
+            <Button Margin="5,10,0,0" Style="{StaticResource SidebarButton}" Content="Cancelar" Click="QuotaPageButton"></Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

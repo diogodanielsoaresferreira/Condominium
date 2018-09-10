@@ -1,0 +1,148 @@
+﻿<UserControl
+      x:Class="Condominium_Manager.Pages.BuildingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+      xmlns:local="clr-namespace:Condominium_Manager"
+      mc:Ignorable="d"
+      d:DesignHeight="300" d:DesignWidth="300"
+      >
+
+    <Border>
+        <Grid>
+
+            <m:Map x:Name="Map" Margin="0,5,0,0" CredentialsProvider="Ap5LHC5fg5zoGGX83WIHPK5y-ab2P_QqSa-MVsTjIZicPoQcAC5i0Odx_NepG9Aa" Mode="Road" Center="39.421458, -8.214617" ZoomLevel="6">
+                <m:MapItemsControl ItemsSource="{Binding Buildings}">
+                    <m:MapItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <m:Pushpin Tag="{Binding Path=.}" Location="{Binding Location}" Cursor="Hand" MouseDown="Pushpin_MouseDown">
+                                <ToolTipService.ToolTip>
+                                    <ToolTip Style="{StaticResource MyToolTipStyle}" />
+                                </ToolTipService.ToolTip>
+                            </m:Pushpin>
+                        </DataTemplate>
+                    </m:MapItemsControl.ItemTemplate>
+                </m:MapItemsControl>
+            </m:Map>
+
+            <Border Name="PushpinPopup" Visibility="Collapsed" Width="250" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{StaticResource DominiumLightColor}" Margin="30,30,0,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition  Width="2*" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Name="lName" Grid.Column="0" Grid.Row="0" FontWeight="Bold" Text="Nome do Prédio" TextTrimming="CharacterEllipsis" Padding="10,8,0,0" Foreground="White"></TextBlock>
+                    <TextBlock Name="lMor" Grid.Column="0" Grid.Row="1" Text="Morada"  TextTrimming="CharacterEllipsis" Padding="10,8,0,0" Foreground="White"></TextBlock>
+                    <TextBlock Name="lCid" Grid.Column="0" Grid.Row="2" Text="Cidade" TextTrimming="CharacterEllipsis" Padding="10,8,0,0" Foreground="White"></TextBlock>
+
+                    <Grid Grid.Row="0" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Source="pack://application:,,,/Images/enter.png" />
+                    </Grid>
+
+                    <Button x:Name="EBButton" Style="{StaticResource SidebarButton}" Click="Enter_Building" Grid.Row="0" Grid.Column="1" Padding="10,0,0,0">
+                        <Button.Content>
+                            <Grid Width="{Binding ActualWidth, ElementName=EBButton}" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Margin="0,0,5,0" Grid.Column="0" VerticalAlignment="Center" Stretch="Uniform" HorizontalAlignment="Center" Width="15" Height="15" Source="pack://application:,,,/Images/enter.png"/>
+                                <TextBlock Grid.Column="1" VerticalAlignment="Center">Aceder</TextBlock>
+                            </Grid>
+                        </Button.Content>
+                    </Button>
+
+                    <Button x:Name="EDButton" Style="{StaticResource SidebarButton}" Click="Edit_Button" Grid.Row="1" Grid.Column="1" Padding="10,0,0,0">
+                        <Button.Content>
+                            <Grid Width="{Binding ActualWidth, ElementName=EDButton}" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Margin="0,0,5,0" Grid.Column="0" VerticalAlignment="Center" Stretch="Uniform" HorizontalAlignment="Center" Width="15" Height="15" Source="pack://application:,,,/Images/edit.png"/>
+                                <TextBlock Grid.Column="1" VerticalAlignment="Center">Editar</TextBlock>
+                            </Grid>
+                        </Button.Content>
+                    </Button>
+
+                    <Button x:Name="DPButton" Style="{StaticResource SidebarButton}" Click="Delete_Building" Grid.Row="2" Grid.Column="1" Padding="10,0,0,0">
+                        <Button.Content>
+                            <Grid Width="{Binding ActualWidth, ElementName=DPButton}" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Margin="0,0,5,0" Grid.Column="0" VerticalAlignment="Center" Stretch="Uniform" HorizontalAlignment="Center" Width="15" Height="15" Source="pack://application:,,,/Images/remove.png"/>
+                                <TextBlock Grid.Column="1" VerticalAlignment="Center">Apagar</TextBlock>
+                            </Grid>
+                        </Button.Content>
+                    </Button>
+                </Grid>
+            </Border>
+            <Border Width="250" Height="33" HorizontalAlignment="Left" VerticalAlignment="Bottom" Background="{StaticResource DominiumMainColor}" Margin="30,0,0,30">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition  Width="2*" />
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="APButton" Grid.Column="0" Style="{StaticResource SidebarButton}" Click="Add_Building" Padding="10,0,0,0">
+                        <Button.Content>
+                            <Grid Width="{Binding ActualWidth, ElementName=APButton}" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Margin="0,0,5,0" Grid.Column="0" VerticalAlignment="Center" Stretch="Uniform" HorizontalAlignment="Center" Width="20" Height="15" Source="/Images/add.png" />
+                                <TextBlock Grid.Column="1" VerticalAlignment="Center">Adicionar Prédio</TextBlock>
+                            </Grid>
+                        </Button.Content>
+                    </Button>
+                    <Button x:Name="HelpButton" Grid.Column="1" Style="{StaticResource SidebarButton}" Padding="10,0,0,0" Margin="0.333,0,0,-0.333" Height="33" VerticalAlignment="Top" Click="HelpButton_Click" MouseLeave="HelpButton_MouseLeave">
+                        <Button.Content>
+                            <Grid Width="{Binding ActualWidth, ElementName=APButton}" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Margin="0,0,5,0" Grid.Column="0" VerticalAlignment="Center" Stretch="Uniform" HorizontalAlignment="Center" Width="20" Height="15" Source="/Images/help.png" />
+                                <TextBlock Grid.Column="1" VerticalAlignment="Center">Ajuda</TextBlock>
+                            </Grid>
+                        </Button.Content>
+                        <Button.ToolTip>
+                            <ToolTip Background="{StaticResource DominiumMainColor}" Width="200">
+                                <StackPanel Margin="5">
+                                    <TextBlock FontWeight="Bold" Foreground="White">Bem-vindo</TextBlock>
+                                    <TextBlock Foreground="White"  TextWrapping="Wrap"><LineBreak />Esta é a página inicial do dominium, o seu gestor de condomínios. Pode aceder a cada um dos seus prédios navegando pelo mapa, ou então escolhendo no menu do topo. Pode adicionar um novo prédio em "Adicionar Prédio".</TextBlock>
+                                </StackPanel>
+                            </ToolTip>
+                        </Button.ToolTip>
+                    </Button>
+                </Grid>
+            </Border>
+            <Border Width="230" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="40,0,0,70">
+                <Image Margin="0,0,5,0" Grid.Column="0" VerticalAlignment="Center" Stretch="Uniform" HorizontalAlignment="Center" Width="220" Source="/Images/dominium.png" />
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

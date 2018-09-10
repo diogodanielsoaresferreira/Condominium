@@ -1,0 +1,137 @@
+﻿<UserControl x:Class="Condominium_Manager.Pages.ManutencaoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Condominium_Manager.Pages"
+      xmlns:System="clr-namespace:System;assembly=mscorlib"
+      xmlns:converters="clr-namespace:Condominium_Manager"
+      DataContext="{Binding CurrentPage}"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Loaded="UserControl_Loaded">
+
+    <UserControl.Resources>
+        <converters:DescricaoValueConverter x:Key="DescricaoValueConverter"/>
+    </UserControl.Resources>
+
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition />
+            <RowDefinition Height="auto" MinHeight="100px"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="0,5,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+
+            <Label Grid.Column="1" HorizontalAlignment="Center" FontWeight="ExtraBlack" FontSize="26" >Manutenções</Label>
+            <Grid Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition MinWidth="180px"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="ButtonManu" Margin="0,0,0,5" Grid.Column="1" Style="{StaticResource SidebarButton}" Click="Add_Manutencao">
+                    <Button.Content>
+                        <Grid Width="{Binding ActualWidth, ElementName=ButtonManu}" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Margin="0,0,4.8,0" Grid.Column="0" VerticalAlignment="Bottom" Stretch="Uniform" HorizontalAlignment="Center" Width="20" Height="20" Source="/Images/add.png" />
+                            <TextBlock Grid.Column="1">Adicionar Manutenção</TextBlock>
+                        </Grid>
+                    </Button.Content>
+                </Button>
+            </Grid>
+        </Grid>
+
+
+        <Label x:Name="NoManuLabel" Content="Escolha uma manutenção para veres a sua informação" HorizontalAlignment="Center" Grid.Row="1"></Label>
+
+        <Border x:Name="ManutencaoViewer" Grid.Row="1" BorderThickness="2" BorderBrush="Black" Visibility="Collapsed" ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+            <ScrollViewer>
+                <Grid Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    
+                    <Label Grid.Row="0" Content="Título" FontWeight="DemiBold" FontSize="20" HorizontalAlignment="Center"></Label>
+                    <TextBlock Grid.Row="1" HorizontalAlignment="Center" Text="{Binding SelectedItem.titulo, ElementName=ManutencaoGrid}"></TextBlock>
+                    <Label Margin="0,5,0,0" Grid.Row="2" Content="Data" FontWeight="DemiBold" FontSize="20" HorizontalAlignment="Center"></Label>
+                    <TextBlock HorizontalAlignment="Center" Grid.Row="3" Text="{Binding SelectedItem.dataString, ElementName=ManutencaoGrid}"></TextBlock>
+                    <Label Margin="0,5,0,0" HorizontalAlignment="Center" Grid.Row="4" FontWeight="DemiBold" FontSize="20" Content="Descrição"></Label>
+                    <TextBlock Grid.Row="5" HorizontalAlignment="Center" Margin="5,0,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.descricao, ElementName=ManutencaoGrid, Converter={StaticResource DescricaoValueConverter}}"></TextBlock>
+                    <Label Margin="0,5,0,0" HorizontalAlignment="Center" Grid.Row="6" FontWeight="DemiBold" FontSize="20" Content="Tipo"></Label>
+                    <TextBlock Grid.Row="7" HorizontalAlignment="Center" Margin="5,0,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.tipo, ElementName=ManutencaoGrid}"></TextBlock>
+                    <Label Margin="0,5,5,0" Content="Pagamento" Grid.Row="8"  FontWeight="DemiBold" FontSize="20" HorizontalAlignment="Center"></Label>
+                    <TextBlock x:Name="NoPa" HorizontalAlignment="Center" Grid.Row="9">Sem pagamento associado</TextBlock>
+                    <StackPanel x:Name="SP1" Grid.Row="9" HorizontalAlignment="Center" Margin="5,0,0,0"  Orientation="Horizontal">
+                        <TextBlock>Balanço:</TextBlock>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding SelectedItem.op.Balanco, ElementName=ManutencaoGrid}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel x:Name="SP2" Grid.Row="10" HorizontalAlignment="Center" Margin="5,0,0,0"  Orientation="Horizontal">
+                        <TextBlock>Nome do Sujeito Fiscal:</TextBlock>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding SelectedItem.op.sf.nome, ElementName=ManutencaoGrid}"></TextBlock>
+                    </StackPanel>
+                    
+                </Grid>
+            </ScrollViewer>
+        </Border>
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*" MinHeight="100px"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <StackPanel Margin="5" Grid.Column="0">
+                    <Label>Data Inicial</Label>
+                    <DatePicker HorizontalAlignment="Left" Name="datePicker1"
+                SelectedDate="{Binding
+                Path=StartDate,
+                Mode=TwoWay,
+                TargetNullValue={x:Static System:DateTime.Now}}"
+                VerticalAlignment="Top" />
+                </StackPanel>
+
+                <StackPanel Margin="5" Grid.Column="2">
+                    <Label HorizontalAlignment="Right">Data Final</Label>
+                    <DatePicker HorizontalAlignment="Right" Name="datePicker2"
+                SelectedDate="{Binding
+                Path=EndDate,
+                Mode=TwoWay,
+                TargetNullValue={x:Static System:DateTime.Now}}"
+                VerticalAlignment="Top" />
+                </StackPanel>
+            </Grid>
+
+            <DataGrid x:Name="ManutencaoGrid" IsReadOnly="True" Grid.Row="1" ItemsSource="{Binding Manutencoes}" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="ManutencaoGrid_SelectionChanged" AlternatingRowBackground="WhiteSmoke" GridLinesVisibility="None">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" Header="Data" Binding="{Binding dataString}"/>
+                    <DataGridTextColumn Width="*" Header="Titulo" Binding="{Binding titulo}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Grid>
+
+
+    </Grid>
+</UserControl>
+

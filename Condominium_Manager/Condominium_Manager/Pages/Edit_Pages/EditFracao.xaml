@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="Condominium_Manager.Pages.Edit_Pages.EditFracao"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Condominium_Manager.Pages.Edit_Pages"
+      mc:Ignorable="d" 
+      DataContext="{Binding CurrentPage}" 
+      d:DesignHeight="300" d:DesignWidth="300">
+
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Margin="10">
+            <Label FontSize="20">Adicionar Fração</Label>
+            <Border x:Name="ErrorBorder" Background="Red" CornerRadius="5" Margin="0,5" Padding="5" Visibility="Collapsed">
+                <Label x:Name="ErrorLabel" Foreground="White"></Label>
+            </Border>
+
+            <Label>Piso (*)</Label>
+            <TextBox x:Name="tbPiso" MaxLength="9"></TextBox>
+            <Label>Zona</Label>
+            <TextBox x:Name="tbZona" MaxLength="15"></TextBox>
+            <Label>Área (*)</Label>
+            <TextBox x:Name="tbArea" MaxLength="8"></TextBox>
+            <Label>Quota</Label>
+            <TextBox x:Name="tbQuota" MaxLength="19"></TextBox>
+
+            <Label>Tipo</Label>
+            <ComboBox x:Name="CBTipo" SelectedIndex="0">
+                <ComboBoxItem Content="Habitação"/>
+                <ComboBoxItem Content="Estacionamento"/>
+                <ComboBoxItem Content="Comercial"/>
+            </ComboBox>
+
+            <Button Name="btnSaveFile" Margin="0,10,0,0" Style="{StaticResource SidebarButton}" Click="btnSaveFile_Click">Adicionar fotos da Fração</Button>
+
+            <DataGrid MaxHeight="150px" x:Name="myDataGrid" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding photos}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" IsReadOnly="True" Binding="{Binding FileName}" Header="Name"/>
+                    <DataGridTextColumn Width="*" IsReadOnly="True" Binding="{Binding sizeKB}" Header="Size"/>
+                    <DataGridTemplateColumn Header="Delete">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Delete" Click="DeletePhoto">
+
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+            <Grid HorizontalAlignment="Stretch" Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Margin="0,0,5,0" Grid.Column="0" Style="{StaticResource SidebarButton}" Content="Editar Fração" Click="UpdateFrac"></Button>
+                <Button Margin="5,0,0,0" Grid.Column="1" Style="{StaticResource SidebarButton}" Content="Retroceder" Click="Button_Click"></Button>
+            </Grid>
+            
+
+        </StackPanel>
+    </Grid>
+</UserControl>

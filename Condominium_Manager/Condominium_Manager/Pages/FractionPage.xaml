@@ -1,0 +1,145 @@
+﻿<UserControl x:Class="Condominium_Manager.Pages.FractionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Condominium_Manager.Pages"
+      xmlns:converters="clr-namespace:Condominium_Manager"
+      mc:Ignorable="d" 
+      DataContext="{Binding CurrentPage}"
+      Loaded="Window_Loaded"
+      d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <converters:DateValueConverter x:Key="DateValueConverter"/>
+        <converters:CompraConverter x:Key="CompraConverter"/>
+        <!-- Start Fade -->
+        <Storyboard x:Key="FadeIn" >
+            <DoubleAnimation Duration="0:0:.25" Storyboard.TargetProperty="Opacity" From="0" To="1" />
+        </Storyboard>
+        <Storyboard x:Key="FadeOut">
+            <DoubleAnimation Duration="0:0:.5" Storyboard.TargetProperty="Opacity" To="0" />
+        </Storyboard>
+        <!-- End Fade -->
+    </UserControl.Resources>
+
+    <Grid Margin="5">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <GroupBox Grid.Row="0" Margin="5,5,5,5" FontWeight="Bold">
+                <GroupBox.Header>
+                    Histórico de Condóminos
+                </GroupBox.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid x:Name="CompraGrid" Grid.Row="0" ItemsSource="{Binding Compras}" IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False"  AlternatingRowBackground="WhiteSmoke" GridLinesVisibility="None">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Header="Nome" Binding="{Binding Path=c.Nome}"/>
+                            <DataGridTextColumn Width="*" Header="Email" Binding="{Binding Path=c.Email}"/>
+                            <DataGridTextColumn Width="*" Header="Data de Compra" Binding="{Binding Path=Data_Compra}"/>
+                            <DataGridTextColumn Width="*" Header="Data de Venda" Binding="{Binding Path=Data_Venda, Converter={StaticResource DateValueConverter}}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Button Margin="5,10,5,5" IsEnabled="{Binding Venda, Converter={StaticResource CompraConverter}}" Grid.Column="0" Style="{StaticResource SidebarButton}" Content="Atribuir Condómino" Click="CompraButton"></Button>
+                        <Button Margin="5,10,5,5" IsEnabled="{Binding Compra, Converter={StaticResource CompraConverter}}" Grid.Column="1" Style="{StaticResource SidebarButton}" Content="Remover Condómino" Click="VendaButton"></Button>
+                    </Grid>
+                </Grid>
+                
+            </GroupBox>
+            <Button Margin="10" Grid.Row="1" HorizontalAlignment="Stretch" Padding="10" Style="{StaticResource SidebarButton}" Click="FractionsPage">Retroceder</Button>
+
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+
+            <GroupBox Grid.Row="0" Margin="5,5,5,5" FontWeight="Bold">
+                <GroupBox.Header>
+                    Informação
+                </GroupBox.Header>
+
+                <Grid>
+                    <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <Label Content="Piso:" ></Label>
+                                <Label Content="Zona: " ></Label>
+                                <Label Content="Quota: " ></Label>
+                                <Label Content="Área: "></Label>
+                                <Label Content="Tipo: "></Label>
+                                <Label FontWeight="Bold" Content="Condómino: "></Label>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" >
+                                <Label Content="{Binding Path=f.Piso}"></Label>
+                                <Label Content="{Binding Path=f.Zona}"></Label>
+                                <Label Content="{Binding Path=f.Quota}"></Label>
+                                <Label Content="{Binding Path=f.Area}"></Label>
+                                <Label Content="{Binding Path=f.Tipo}"></Label>
+                                <Label Content="{Binding Path=f.CurrentCondomino.Nome}"></Label>
+                            </StackPanel>
+
+
+                            <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource SidebarButton}" Click="EditarInfo">Editar</Button>
+
+                        </Grid>
+
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Grid.Row="1" Margin="5,5,5,5" FontWeight="Bold" ClipToBounds="True">
+                <GroupBox.Header>
+                    Fotos da Fração
+                </GroupBox.Header>
+                <Grid x:Name="ImageCanvas" Width="auto" Height="auto">
+                    <Image x:Name="myImage" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <TranslateTransform X="0" Y="0" />
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Image x:Name="myImage2" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <TranslateTransform X="0" Y="0" />
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <TextBlock TextWrapping="Wrap" x:Name="ErrorText" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Center" Visibility="Collapsed" Text="The specified folder does not exist" />
+                </Grid>
+            </GroupBox>
+
+        </Grid>
+
+    </Grid>
+</UserControl>

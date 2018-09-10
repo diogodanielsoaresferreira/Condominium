@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="Condominium_Manager.Pages.CompraFracao"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Condominium_Manager.Pages"
+      xmlns:converters="clr-namespace:Condominium_Manager"
+      mc:Ignorable="d"
+      DataContext="{Binding CurrentPage}"
+      d:DesignHeight="300" d:DesignWidth="300">
+
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50px" />
+        </Grid.RowDefinitions>
+
+        <Label FontSize="20" HorizontalAlignment="Center" Content="Atribuir Condominio" Grid.Row="0"></Label>
+
+        <StackPanel Grid.Row="1">
+
+            <StackPanel Margin="5">
+                <Label FontSize="16" HorizontalAlignment="Center" Content="Data" ></Label>
+                <Calendar x:Name="calendarCompra" DisplayDateStart="{Binding StartDate}"></Calendar>
+            </StackPanel>
+
+            <StackPanel Margin="5">
+            <Label FontSize="16" HorizontalAlignment="Center" Content="Condómino" ></Label>
+            <ComboBox x:Name="CBCondomino" HorizontalContentAlignment="Center" ItemsSource="{Binding Condominos}" SelectedIndex="0" DisplayMemberPath="Nome"></ComboBox>
+        </StackPanel>
+
+
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+            <Button Margin="0,10,5,0" Style="{StaticResource SidebarButton}" Content="Atribuir" Click="CompraButton"></Button>
+            <Button Margin="5,10,0,0" Style="{StaticResource SidebarButton}" Content="Cancelar" Click="CancelarButton"></Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

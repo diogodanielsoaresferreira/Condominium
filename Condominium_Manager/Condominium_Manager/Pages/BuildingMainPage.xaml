@@ -1,0 +1,211 @@
+﻿<UserControl x:Class="Condominium_Manager.Pages.BuildingMainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+      xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+      xmlns:local="clr-namespace:Condominium_Manager.Pages"
+      mc:Ignorable="d"
+      DataContext="{Binding CurrentPage}"
+      xmlns:dataVis="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+      xmlns:chartPrmtvs="clr-namespace:System.Windows.Controls.DataVisualization.Charting.Primitives;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+      xmlns:charts="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+      Loaded="Window_Loaded"
+      xmlns:converters="clr-namespace:Condominium_Manager"
+      d:DesignHeight="600" d:DesignWidth="600">
+
+    <UserControl.Resources>
+        <!-- Start Fade -->
+        <Storyboard x:Key="FadeIn" >
+            <DoubleAnimation Duration="0:0:.25" Storyboard.TargetProperty="Opacity" From="0" To="1" />
+        </Storyboard>
+        <Storyboard x:Key="FadeOut">
+            <DoubleAnimation Duration="0:0:.5" Storyboard.TargetProperty="Opacity" To="0" />
+        </Storyboard>
+        <!-- End Fade -->
+        <converters:ColorValueConverter x:Key="ColorValueConverter"/>
+    </UserControl.Resources>
+    <Grid Margin="5">
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="215"/>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <GroupBox Grid.Row="0" Margin="5,5,5,5">
+                <GroupBox.Header>
+                    Edifício
+                </GroupBox.Header>
+                <StackPanel Height="Auto">
+                    <chartingToolkit:Chart  Name="pieChart" Title="Tipos de frações"
+                        VerticalAlignment="Top" >
+                        <chartingToolkit:PieSeries DependentValuePath="Value" 
+                            IndependentValuePath="Key" ItemsSource="{Binding}" 
+                            IsSelectionEnabled="True" />
+                    </chartingToolkit:Chart>
+                </StackPanel>
+            </GroupBox>
+
+
+            <GroupBox Grid.Row="1" Margin="5,5,5,5" FontWeight="Bold">
+                <GroupBox.Header>
+                    Finanças
+                </GroupBox.Header>
+                <Border Margin="5,5,5,5" BorderBrush="Black" BorderThickness="0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Rectangle Grid.Row="0" Grid.ColumnSpan="3" Fill="#DCDCDC" />
+                        <Border BorderBrush="Black" Grid.Row="1" Grid.ColumnSpan="3" BorderThickness="0" />
+                        <Border BorderBrush="Black" Grid.Row="3" Grid.ColumnSpan="3" BorderThickness="0" />
+                        <Rectangle Grid.Row="4" Grid.ColumnSpan="3" Fill="#DCDCDC" />
+                        <Border BorderBrush="Black" Grid.Row="5" Grid.ColumnSpan="3" BorderThickness="0" />
+                        <Border BorderBrush="Black" Grid.Row="7" Grid.ColumnSpan="3" BorderThickness="0" />
+                        <Rectangle Grid.Row="8" Grid.ColumnSpan="3" Fill="#DCDCDC" />
+                        <Border BorderBrush="Black" Grid.Column="1" Grid.RowSpan="9" BorderThickness="0" />
+                        <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Balanço Geral" />
+                        <TextBlock Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Balanco}" >
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Foreground"  Value="{Binding BalancoD, Converter={StaticResource ColorValueConverter}}"/>
+                                </Style>
+                                
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Balanço Último Mês" />
+                        <TextBlock Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding BalancoMes}" >
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Foreground"  Value="{Binding BalancoMesD, Converter={StaticResource ColorValueConverter}}"/>
+                                </Style>
+
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Receita Último Mês" />
+                        <TextBlock Grid.Column="2" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding ReceitaMes}" >
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Foreground"  Value="{Binding ReceitaMesD, Converter={StaticResource ColorValueConverter}}"/>
+                                </Style>
+
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Despesa Último Mês" />
+                        <TextBlock Grid.Column="2" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding DespesaMes}" >
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Foreground"  Value="{Binding DespesaMesD, Converter={StaticResource ColorValueConverter}}"/>
+                                </Style>
+
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="8" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Número de Quotas Atrasadas" />
+                        <TextBlock Grid.Column="2" Grid.Row="8" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding QuotasDel}" />
+                    </Grid>
+                </Border>
+            </GroupBox>
+
+            <GroupBox Grid.Row="2" Margin="5,5,5,5">
+                <GroupBox.Header>
+                    Próximos Eventos
+                </GroupBox.Header>
+                <DataGrid IsReadOnly="True" ItemsSource="{Binding Eventos}" AutoGenerateColumns="False" CanUserAddRows="False"  AlternatingRowBackground="WhiteSmoke" GridLinesVisibility="None">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*" Header="Data" Binding="{Binding dataString}"/>
+                        <DataGridTextColumn Width="*" Header="Título" Binding="{Binding titulo}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+
+            <GroupBox Grid.Row="0" Margin="5,5,5,5" FontWeight="Bold">
+                <GroupBox.Header>
+                    Localização
+                </GroupBox.Header>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <m:Map Grid.Row="0" x:Name="Map" CredentialsProvider="Ap5LHC5fg5zoGGX83WIHPK5y-ab2P_QqSa-MVsTjIZicPoQcAC5i0Odx_NepG9Aa" Mode="Road" Center="39.421458, -8.214617" ZoomLevel="13">
+                        <m:MapItemsControl ItemsSource="{Binding CollP}">
+                            <m:MapItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <m:Pushpin Tag="{Binding Path=.}" Location="{Binding Location}" >
+                                        <ToolTipService.ToolTip>
+                                            <ToolTip Style="{StaticResource MyToolTipStyle}" />
+                                        </ToolTipService.ToolTip>
+                                    </m:Pushpin>
+                                </DataTemplate>
+                            </m:MapItemsControl.ItemTemplate>
+                        </m:MapItemsControl>
+                    </m:Map>
+
+                    <StackPanel Grid.Row="1">
+                        <Label Content="{Binding p.Morada}"></Label>
+                        <Label Content="{Binding p.Codigo_Postal}"></Label>
+                        <Label Content="{Binding p.Cidade}"></Label>
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Grid.Row="1" Margin="5,5,5,5" FontWeight="Bold" ClipToBounds="True">
+                <GroupBox.Header>
+                    Fotos do Prédio
+                </GroupBox.Header>
+                <Grid x:Name="ImageCanvas" Width="auto" Height="auto">
+                    <Image x:Name="myImage" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <TranslateTransform X="0" Y="0" />
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Image x:Name="myImage2" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <TranslateTransform X="0" Y="0" />
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <TextBlock TextWrapping="Wrap" x:Name="ErrorText" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Center" Visibility="Collapsed" Text="The specified folder does not exist" />
+                </Grid>
+            </GroupBox>
+
+        </Grid>
+
+    </Grid>
+    
+</UserControl>

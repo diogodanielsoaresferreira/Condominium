@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="Condominium_Manager.Pages.Add_Pages.AddManutencaoWithDate"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Condominium_Manager.Pages.Add_Pages"
+      xmlns:System="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" 
+      DataContext="{Binding CurrentPage}"
+      d:DesignHeight="300" d:DesignWidth="300">
+
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Margin="10">
+            <Label FontSize="20">Adicionar Manutenção</Label>
+            <Border x:Name="ErrorBorder" Background="Red" CornerRadius="5" Margin="0,5" Padding="5" Visibility="Collapsed">
+                <Label x:Name="ErrorLabel" Foreground="White"></Label>
+            </Border>
+
+            <Label>Data</Label>
+            <DatePicker HorizontalAlignment="Left" Name="datePicker"
+                SelectedDate="{Binding
+                Path=Date,
+                Mode=TwoWay,
+                TargetNullValue={x:Static System:DateTime.Now}}"
+                VerticalAlignment="Top" />
+            <Label>Título (*)</Label>
+            <TextBox x:Name="tbTitulo" MaxLength="25"></TextBox>
+            <Label>Descrição</Label>
+            <TextBox ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="tbDesc" TextWrapping="Wrap" AcceptsReturn="True" Height="50px" MaxLength="100"></TextBox>
+            <Label>Tipo</Label>
+            <TextBox x:Name="tbTipo" MaxLength="25"></TextBox>
+            
+            <Button x:Name="AddPay" Grid.Column="0" Margin="0,10,5,0" Style="{StaticResource SidebarButton}" Content="Adicionar Pagamento" Click="AddPayment"></Button>
+            <StackPanel Orientation="Vertical" x:Name="SP" Visibility="Collapsed">
+                <Label>Pagamento associado</Label>
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <StackPanel>
+                        <Label>Data</Label>
+                        <Label Content="{Binding op.Date}"></Label>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label>Preço(€)</Label>
+                        <Label Content="{Binding op.simBal}"></Label>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label>Sujeito Fiscal</Label>
+                        <Label Content="{Binding op.sf.nome}"></Label>
+                    </StackPanel>
+                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="EditPay" Grid.Column="0" Margin="0,10,5,0" Style="{StaticResource SidebarButton}" Content="Editar Pagamento" Click="EditPayment"></Button>
+                    <Button x:Name="CancelPay" Grid.Column="1" Margin="5,10,0,0" Style="{StaticResource SidebarButton}" Content="Apagar Pagamento" Click="CancelPayment"></Button>
+                </Grid>
+                
+            </StackPanel>
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Margin="0,10,5,0" Style="{StaticResource SidebarButton}" Content="Adicionar Manutenção" Click="Add"></Button>
+                <Button Grid.Column="1" Margin="5,10,0,0" Style="{StaticResource SidebarButton}" Content="Cancelar" Click="Cancel"></Button>
+            </Grid>
+
+        </StackPanel>
+    </Grid>
+</UserControl>

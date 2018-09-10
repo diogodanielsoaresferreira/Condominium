@@ -1,0 +1,284 @@
+﻿<UserControl x:Class="Condominium_Manager.Pages.QuotaPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Condominium_Manager.Pages"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" 
+      xmlns:converters="clr-namespace:Condominium_Manager"
+      DataContext="{Binding CurrentPage}"
+      d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <converters:MonthQuotaConverter x:Key="MonthQuotaConverter"/>
+        <converters:EnabledButtonConverter x:Key="EnabledButtonConverter"/>
+        <converters:MultiBindingMonthQuota x:Key="MultiBindingMonthQuota"/>
+        <sys:Int32 x:Key="Janeiro">1</sys:Int32>
+        <sys:Int32 x:Key="Fevereiro">2</sys:Int32>
+        <sys:Int32 x:Key="Marco">3</sys:Int32>
+        <sys:Int32 x:Key="Abril">4</sys:Int32>
+        <sys:Int32 x:Key="Maio">5</sys:Int32>
+        <sys:Int32 x:Key="Junho">6</sys:Int32>
+        <sys:Int32 x:Key="Julho">7</sys:Int32>
+        <sys:Int32 x:Key="Agosto">8</sys:Int32>
+        <sys:Int32 x:Key="Setembro">9</sys:Int32>
+        <sys:Int32 x:Key="Outubro">10</sys:Int32>
+        <sys:Int32 x:Key="Novembro">11</sys:Int32>
+        <sys:Int32 x:Key="Dezembro">12</sys:Int32>
+    </UserControl.Resources>
+
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ComboBox x:Name="CB" SelectedIndex="5" IsReadOnly="True" Style="{StaticResource ComboBoxMenu}"  ItemsSource="{Binding Path=Years, Mode=TwoWay}" SelectionChanged="CB_SelectionChanged">
+        </ComboBox>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <DataGrid IsReadOnly="True" x:Name="QuotaGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" ItemsSource="{Binding Path=Quotas}" AlternatingRowBackground="WhiteSmoke" GridLinesVisibility="None">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" Header="Condómino" Binding="{Binding Nome}" />
+                    <DataGridTextColumn Width="*" Header="Piso" Binding="{Binding Piso}" />
+                    <DataGridTextColumn Width="*" Header="Zona" Binding="{Binding Zona}" />
+                    <DataGridTextColumn Width="*" Header="Tipo" Binding="{Binding Tipo}" />
+                    <DataGridTextColumn Width="*" Header="Quota" Binding="{Binding Quota}" />
+                    <DataGridTemplateColumn Header="1" Width="SizeToHeader" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image>
+                                    <Image.Source>
+                                        <MultiBinding Converter="{StaticResource MultiBindingMonthQuota }">
+                                            <Binding Path="Janeiro" />
+                                            <Binding Path="DateCompra" />
+                                            <Binding Path="DateVenda" />
+                                            <Binding Path="Text" ElementName="CB" />
+                                            <Binding Source="{StaticResource Janeiro}" />
+                                        </MultiBinding>
+                                    </Image.Source>
+                                </Image>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="2" Width="SizeToHeader" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image>
+                                    <Image.Source>
+                                        <MultiBinding Converter="{StaticResource MultiBindingMonthQuota }">
+                                            <Binding Path="Fevereiro" />
+                                            <Binding Path="DateCompra" />
+                                            <Binding Path="DateVenda" />
+                                            <Binding Path="Text" ElementName="CB"></Binding>
+                                            <Binding Source="{StaticResource Fevereiro}" />
+                                        </MultiBinding>
+                                    </Image.Source>
+                                </Image>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="3" Width="SizeToHeader" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image>
+                                    <Image.Source>
+                                        <MultiBinding Converter="{StaticResource MultiBindingMonthQuota }">
+                                            <Binding Path="Marco" />
+                                            <Binding Path="DateCompra" />
+                                            <Binding Path="DateVenda" />
+                                            <Binding Path="Text" ElementName="CB"></Binding>
+                                            <Binding Source="{StaticResource Marco}" />
+                                        </MultiBinding>
+                                    </Image.Source>
+                                </Image>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="4" Width="SizeToHeader" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image>
+                                    <Image.Source>
+                                        <MultiBinding Converter="{StaticResource MultiBindingMonthQuota }">
+                                            <Binding Path="Abril" />
+                                            <Binding Path="DateCompra" />
+                                            <Binding Path="DateVenda" />
+                                            <Binding Path="Text" ElementName="CB"></Binding>
+                                            <Binding Source="{StaticResource Abril}" />
+                                        </MultiBinding>
+                                    </Image.Source>
+                                </Image>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="5" Width="SizeToHeader" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image>
+                                    <Image.Source>
+                                        <MultiBinding Converter="{StaticResource MultiBindingMonthQuota }">
+                                            <Binding Path="Maio" />
+                                            <Binding Path="DateCompra" />
+                                            <Binding Path="DateVenda" />
+                                            <Binding Path="Text" ElementName="CB"></Binding>
+                                            <Binding Source="{StaticResource Maio}" />
+                                        </MultiBinding>
+                                    </Image.Source>
+                                </Image>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="6" Width="SizeToHeader" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image>
+                                    <Image.Source>
+                                        <MultiBinding Converter="{StaticResource MultiBindingMonthQuota }">
+                                            <Binding Path="Junho" />
+                                            <Binding Path="DateCompra" />
+                                            <Binding Path="DateVenda" />
+                                            <Binding Path="Text" ElementName="CB"></Binding>
+                                            <Binding Source="{StaticResource Junho}" />
+                                        </MultiBinding>
+                                    </Image.Source>
+                                </Image>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="7" Width="SizeToHeader" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image>
+                                    <Image.Source>
+                                        <MultiBinding Converter="{StaticResource MultiBindingMonthQuota }">
+                                            <Binding Path="Julho" />
+                                            <Binding Path="DateCompra" />
+                                            <Binding Path="DateVenda" />
+                                            <Binding Path="Text" ElementName="CB"></Binding>
+                                            <Binding Source="{StaticResource Julho}" />
+                                        </MultiBinding>
+                                    </Image.Source>
+                                </Image>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="8" Width="SizeToHeader" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image>
+                                    <Image.Source>
+                                        <MultiBinding Converter="{StaticResource MultiBindingMonthQuota }">
+                                            <Binding Path="Agosto" />
+                                            <Binding Path="DateCompra" />
+                                            <Binding Path="DateVenda" />
+                                            <Binding Path="Text" ElementName="CB"></Binding>
+                                            <Binding Source="{StaticResource Agosto}" />
+                                        </MultiBinding>
+                                    </Image.Source>
+                                </Image>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="9" Width="SizeToHeader" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image>
+                                    <Image.Source>
+                                        <MultiBinding Converter="{StaticResource MultiBindingMonthQuota }">
+                                            <Binding Path="Setembro" />
+                                            <Binding Path="DateCompra" />
+                                            <Binding Path="DateVenda" />
+                                            <Binding Path="Text" ElementName="CB"></Binding>
+                                            <Binding Source="{StaticResource Setembro}" />
+                                        </MultiBinding>
+                                    </Image.Source>
+                                </Image>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="10" Width="SizeToHeader" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image>
+                                    <Image.Source>
+                                        <MultiBinding Converter="{StaticResource MultiBindingMonthQuota }">
+                                            <Binding Path="Outubro" />
+                                            <Binding Path="DateCompra" />
+                                            <Binding Path="DateVenda" />
+                                            <Binding Path="Text" ElementName="CB"></Binding>
+                                            <Binding Source="{StaticResource Outubro}" />
+                                        </MultiBinding>
+                                    </Image.Source>
+                                </Image>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="11" Width="SizeToHeader" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image>
+                                    <Image.Source>
+                                        <MultiBinding Converter="{StaticResource MultiBindingMonthQuota }">
+                                            <Binding Path="Novembro" />
+                                            <Binding Path="DateCompra" />
+                                            <Binding Path="DateVenda" />
+                                            <Binding Path="Text" ElementName="CB"></Binding>
+                                            <Binding Source="{StaticResource Novembro}" />
+                                        </MultiBinding>
+                                    </Image.Source>
+                                </Image>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="12" Width="SizeToHeader" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image>
+                                    <Image.Source>
+                                        <MultiBinding Converter="{StaticResource MultiBindingMonthQuota }">
+                                            <Binding Path="Dezembro" />
+                                            <Binding Path="DateCompra" />
+                                            <Binding Path="DateVenda" />
+                                            <Binding Path="Text" ElementName="CB"></Binding>
+                                            <Binding Source="{StaticResource Dezembro}" />
+                                        </MultiBinding>
+                                    </Image.Source>
+                                </Image>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Pagar Quota" Width="SizeToHeader" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="PayQuota" Style="{StaticResource SidebarButton}" Padding="0,0,0,0" >
+                                    <Button.IsEnabled>
+                                        <MultiBinding Converter="{StaticResource EnabledButtonConverter}">
+                                            <Binding Path="." />
+                                            <Binding Path="Text" ElementName="CB"></Binding>
+                                        </MultiBinding>
+                                    </Button.IsEnabled>
+                                    <Button.Content>
+                                        <Image Margin="0,0,5,0" Grid.Column="0" VerticalAlignment="Center" Stretch="Uniform" HorizontalAlignment="Center" Width="20" Height="15" Source="/Images/pay.png" />
+                                    </Button.Content>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+        
+    </Grid>
+</UserControl>

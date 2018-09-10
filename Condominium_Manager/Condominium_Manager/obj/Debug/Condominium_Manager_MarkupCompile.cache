@@ -1,0 +1,20 @@
+﻿Condominium_Manager
+
+
+winexe
+C#
+.cs
+C:\Users\Media Markt\Desktop\condo\Condominium-Management\Condominium_Manager\Condominium_Manager\obj\Debug\
+Condominium_Manager
+none
+false
+DEBUG;TRACE
+C:\Users\Media Markt\Desktop\condo\Condominium-Management\Condominium_Manager\Condominium_Manager\App.xaml
+351476343881
+
+72-287972736
+50116395996
+MainWindow.xaml;Pages\Add_Pages\AddAviso.xaml;Pages\Add_Pages\AddCondomino.xaml;Pages\Add_Pages\AddFraction.xaml;Pages\Add_Pages\AddBuilding.xaml;Pages\Add_Pages\AddManutencao.xaml;Pages\Add_Pages\AddManutencaoWithDate.xaml;Pages\Add_Pages\AddNota.xaml;Pages\Add_Pages\AddOrcamento.xaml;Pages\Add_Pages\AddPagamento.xaml;Pages\Add_Pages\AddReuniao.xaml;Pages\Add_Pages\AddReunionWithDate.xaml;Pages\Add_Pages\AddSujFisc.xaml;Pages\Add_Pages\PayQuota.xaml;Pages\AgendaPage.xaml;Pages\CompraFracao.xaml;Pages\CondominosPage.xaml;Pages\Edit_Pages\EditFracao.xaml;Pages\FinancesPage.xaml;Pages\FractionPage.xaml;Pages\FractionsPage.xaml;Pages\BuildingMainPage.xaml;Pages\BuildingsPage.xaml;Pages\Edit_Pages\EditBuilding.xaml;Pages\MainSideBar.xaml;Pages\ManutencaoPage.xaml;Pages\OrcamentoPage.xaml;Pages\QuotaPage.xaml;Pages\ReuniaoPage.xaml;Pages\VendaFracao.xaml;Styles\Buttons.xaml;Styles\Colors.xaml;Styles\Fonts.xaml;Styles\Texts.xaml;Styles\Windows.xaml;
+
+False
+

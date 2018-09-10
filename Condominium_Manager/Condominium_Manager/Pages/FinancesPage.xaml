@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="Condominium_Manager.Pages.FinancesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Condominium_Manager.Pages"
+      xmlns:System="clr-namespace:System;assembly=mscorlib"
+      xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+      mc:Ignorable="d" 
+      DataContext="{Binding CurrentPage}"
+      d:DesignHeight="300" d:DesignWidth="300">
+
+    <Grid Margin="5,5,5,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <chartingToolkit:Chart Grid.Row="0"  Name="lineChart" Title="Balanço Anual dos últimos 12 Meses" 
+        VerticalAlignment="Top" >
+            <chartingToolkit:LineSeries Title="Euros (€)" DependentValuePath="Value" 
+		    IndependentValuePath="Key" ItemsSource="{Binding}" 
+		    IsSelectionEnabled="True"/>
+        </chartingToolkit:Chart>
+
+        <Grid Grid.Row="1" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="5" Grid.Column="0">
+                <Label>Data Inicial</Label>
+                <DatePicker HorizontalAlignment="Left" Name="datePicker1"
+                SelectedDate="{Binding
+                Path=StartDate,
+                Mode=TwoWay,
+                TargetNullValue={x:Static System:DateTime.Now}}"
+                VerticalAlignment="Top" />
+            </StackPanel>
+            
+            <Label Grid.Column="1" HorizontalAlignment="Center" FontWeight="ExtraBlack" FontSize="26" >Movimentos</Label>
+            <StackPanel Margin="5" Grid.Column="2">
+                <Label HorizontalAlignment="Right">Data Final</Label>
+                <DatePicker HorizontalAlignment="Right" Name="datePicker2"
+                SelectedDate="{Binding
+                Path=EndDate,
+                Mode=TwoWay,
+                TargetNullValue={x:Static System:DateTime.Now}}"
+                VerticalAlignment="Top" />
+            </StackPanel>
+
+        </Grid>
+
+        <DataGrid Grid.Row="2" IsReadOnly="True" ItemsSource="{Binding Transacoes}" AutoGenerateColumns="False" CanUserAddRows="False" AlternatingRowBackground="WhiteSmoke" GridLinesVisibility="None">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="Data" Binding="{Binding dataString}"/>
+                <DataGridTextColumn Width="*" Header="Valor" Binding="{Binding Balanco}"/>
+                <DataGridTextColumn Width="*" Header="Entidade" Binding="{Binding Entidade}"/>
+                <DataGridTextColumn Width="*" Header="Descrição" Binding="{Binding Tipo}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</UserControl>

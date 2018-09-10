@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="Condominium_Manager.Pages.AddAviso"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Condominium_Manager.Pages"
+      mc:Ignorable="d"
+      DataContext="{Binding CurrentPage}"
+      d:DesignHeight="300" d:DesignWidth="300">
+
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Margin="10">
+            <Label FontSize="20">Adicionar Aviso</Label>
+            <Border x:Name="ErrorBorder" Background="Red" CornerRadius="5" Margin="0,5" Padding="5" Visibility="Collapsed">
+                <Label x:Name="ErrorLabel" Foreground="White"></Label>
+            </Border>
+
+            <Label>Data</Label>
+            <Label Content="{Binding date}"></Label>
+            <Label>Título (*)</Label>
+            <TextBox x:Name="tbTitulo" MaxLength="25"></TextBox>
+            <Label>Descrição</Label>
+            <TextBox x:Name="tbDesc" TextWrapping="Wrap" AcceptsReturn="True" Height="150px" ScrollViewer.VerticalScrollBarVisibility="Auto" MaxLength="100"></TextBox>
+            <Label>Condóminos participantes</Label>
+            <ListBox x:Name="selectedCondominos" ItemsSource="{Binding Path=Condominos}" SelectionMode="Multiple" ScrollViewer.VerticalScrollBarVisibility="auto">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <ContentControl Content="{Binding Nome}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Margin="0,10,5,0" Style="{StaticResource SidebarButton}" Content="Adicionar Aviso" Click="add_aviso"></Button>
+                <Button Grid.Column="1" Margin="5,10,0,0" Style="{StaticResource SidebarButton}" Content="Cancelar" Click="Cancelar"></Button>
+            </Grid>
+
+        </StackPanel>
+    </Grid>
+</UserControl>
